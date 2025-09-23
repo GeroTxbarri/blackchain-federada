@@ -1,6 +1,7 @@
 // filepath: /blockchain-federada/blockchain-federada/src/BCfederada.h
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 typedef struct _Bloque {
     int id;
@@ -17,7 +18,8 @@ typedef struct _Blockchain {
 
 typedef struct _BlockchainFederada {
     Blockchain** blockchains;
-    int cantidad;
+    int capacidad;
+    int indice;
     
 } BlockchainFederada;
 
@@ -27,9 +29,12 @@ Bloque* crearBloque(int id, char* mensaje);
 
 Blockchain* crearBlockchain();
 
+BlockchainFederada* crearBCfederada(int tamano);
+
 void agregarBloque(Blockchain* cadena, int arreglo[],int*cont, char* mensaje);
+
+void agregarAfederacion(BlockchainFederada* federacion,Blockchain* bc);
 
 int* construirArbolValidacion(BlockchainFederada* federada);
 
-
-void imprimirBC(Bloque* bc);
+void imprimirBlockChain(Blockchain* bc);

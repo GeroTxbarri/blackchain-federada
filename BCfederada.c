@@ -24,6 +24,22 @@ Blockchain* crearBlockchain(){
     bc ->ultimo =NULL;
     return bc;
 }
+
+BlockchainFederada* crearBCfederada(int capacidad){
+    BlockchainFederada* federada = (BlockchainFederada*)malloc(sizeof(BlockchainFederada));
+    if (federada == NULL) return NULL;
+    
+    federada->blockchains = (Blockchain**)malloc(capacidad * sizeof(Blockchain*));
+    if (federada->blockchains == NULL) {
+        free(federada);
+        return NULL;
+    }
+    federada->capacidad = capacidad;
+    federada->indice =0;
+
+    return federada;
+}
+
 void agregarBloque(Blockchain* cadena, int arreglo[],int*cont, char* mensaje){
     Bloque* nuevo = crearBloque(arreglo[*cont], mensaje);
 
@@ -43,10 +59,16 @@ void agregarBloque(Blockchain* cadena, int arreglo[],int*cont, char* mensaje){
 
 
 }
+
+void agregarAfederacion(BlockchainFederada* federacion,Blockchain*  bc){
+    federacion->blockchains[federacion->indice] = bc;
+    federacion->indice++;
+}
+
 int* construirArbolValidacion(BlockchainFederada* federada) {
 
-    int hojasFederada = federada->cantidad;
-    int cantidadHojas = siguientePotencia(hojasFederada);
+    int cantidad = federada->capacidad;
+    int cantidadHojas = siguientePotencia(cantidad);
     
     int* arregloArbol = (int*)malloc((cantidadHojas + 1) * sizeof(int));
    
@@ -54,7 +76,7 @@ int* construirArbolValidacion(BlockchainFederada* federada) {
     for (int i = 0; i < cantidadHojas; i++) {
         int valorHoja;
         
-        if (i < hojasFederada) {
+        if (i < cantidad) {
 
             if (federada->blockchains[i] != NULL && federada->blockchains[i]->ultimo!= NULL) {
                 valorHoja = federada->blockchains[i]->ultimo->id;
@@ -76,8 +98,20 @@ int* construirArbolValidacion(BlockchainFederada* federada) {
 }
 
 
-void imprimirBC(Bloque* bc){
-    for(;bc->sig!=NULL;bc=bc->sig)
-        printf("%d %s --",bc->id,bc->mensaje);
-    printf("/n");
+void imprimirBlockChain(Blockchain* bc){
+    
+    if(bc==NULL||bc->primero==NULL){
+        printf("cadena vacia\n");
+        return;
+    }
+    Bloque* actual = bc->primero;
+    while(actual!=NULL){
+        printf("id : %d ; mensaje: %s ",actual->id,actual->mensaje);
+        if(actual->sig != NULL){
+            printf(" --> ");
+        }
+        actual = actual->sig;
+
+    }
+    printf("\n");
 }
