@@ -38,3 +38,8 @@ void agregarAfederacion(BlockchainFederada* federacion,Blockchain* bc);
 int* construirArbolValidacion(BlockchainFederada* federada);
 
 void imprimirBlockChain(Blockchain* bc);
+
+
+void actualizarArbolValidacion(int* arbol, int num, int aCambiar);
+
+void alta(int* arbol,BlockchainFederada* federada, char* mensaje,int arreglo[],int*cont,int numBC);

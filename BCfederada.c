@@ -115,3 +115,20 @@ void imprimirBlockChain(Blockchain* bc){
     }
     printf("\n");
 }
+
+
+void actualizarArbolValidacion(int* arbol, int num, int aCambiar){
+    arbol[aCambiar] = num;
+    int raiz = 1;
+    int tam = sizeof(arbol)/sizeof arbol[0];
+    while(tam > 0){
+        raiz *= arbol[aCambiar];
+        tam--;
+    }
+    arbol[0] = raiz;
+}
+
+void alta(int* arbol,BlockchainFederada* federada, char* mensaje,int arreglo[],int*cont,int numBC){
+    agregarBloque(federada->blockchains[numBC],arreglo,cont,mensaje);
+    actualizarArbolValidacion(arbol,arreglo[*cont],numBC); 
+}

@@ -46,7 +46,13 @@ int main() {
   printf("\narbol de validacion : ");
   for(int i = 0; i<6;i++){
     printf(" %d,",arbolValidacion[i]);
-  }
+  } printf("\n");
+
+  alta(arbolValidacion,federacion,"cambie JIJIJI",p,&cont,2);
+  printf("\narbol de validacion : ");
+  for(int i = 0; i<6;i++){
+    printf(" %d,",arbolValidacion[i]);
+  } printf("\n");
 
   free(p);
   return 0;
