@@ -12,13 +12,24 @@ typedef struct _Bloque {
 typedef struct _Blockchain {
     Bloque *primero;
     Bloque *ultimo;
+
 } Blockchain;
 
 typedef struct _BlockchainFederada {
-    Blockchain *blockchains;
+    Blockchain** blockchains;
     int cantidad;
+    
 } BlockchainFederada;
 
+int siguientePotencia(int n);
+
 Bloque* crearBloque(int id, char* mensaje);
-Bloque* agregarBloque(Bloque* bc, int id, char* mensaje);
+
+Blockchain* crearBlockchain();
+
+void agregarBloque(Blockchain* cadena, int arreglo[],int*cont, char* mensaje);
+
+int* construirArbolValidacion(BlockchainFederada* federada);
+
+
 void imprimirBC(Bloque* bc);

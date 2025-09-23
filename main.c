@@ -14,8 +14,28 @@ int main() {
   // IMPORTANTE: libero la memoria pedida para el arreglo de números primos
 
   int cont = 0;
+
+  Blockchain* bc0 = crearBlockchain();
+  Blockchain* bc1 = crearBlockchain();
+  Blockchain* bc2 = crearBlockchain();
+
+  agregarBloque(bc0,p,&cont,"primer bloque");
+  agregarBloque(bc0,p,&cont,"segundo bloque");
+
+  agregarBloque(bc1,p,&cont,"primer bloque");
+  agregarBloque(bc1,p,&cont,"segundo bloque");
+
+  agregarBloque(bc2,p,&cont,"primer bloque");
+  agregarBloque(bc2,p,&cont,"segundo bloque");
+
+  agregarBloque(bc0,p,&cont,"ultimo bloque");
+  agregarBloque(bc1,p,&cont,"ultimo bloque");
+  agregarBloque(bc2,p,&cont,"ultimo bloque");
   
-  crearBloque(p[cont],"holis");
+
+  
+  
+  Bloque* cadena = NULL;
 
 
 
