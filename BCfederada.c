@@ -114,7 +114,7 @@ void imprimirBlockChain(Blockchain* bc){
 }
 
 void imprimirValidacion(int* arbol, int n){
-    printf("\narbol de validacion : ");
+    printf("arbol de validacion : ");
     for(int i = 0; i<n; i++)
         printf(" %d,",arbol[i]);
     printf("\n");
@@ -168,22 +168,24 @@ void actualizacion(int indice, int id, char* mensaje, int arreglo[],int* cont, B
 }
 
 void validacion(int raizAnterior,int* arbol,int tam,BlockchainFederada* federada){
-    if(raizAnterior > arbol[0]){
-        printf("\nEL ARBOL ES FALSO!!! EL TAMAÑO ES MENOR QUE ANTES\n");
+    int mult = 1;
+    for(int i=1; i<tam; i++,mult*=arbol[i]);
+    if(raizAnterior > arbol[0] || arbol[0] != mult){
+        printf("\nLa raiz esta mal\n");
         return;
     }
-    int cant = federada->capacidad;
-   for(int i=0; i<cant;i++){
+    int cant = (federada->capacidad)-1;
+    for(int i=0; i<cant;i++){
         Bloque* bcuno = federada->blockchains[i]->primero;
         Bloque* bcdos = bcuno->sig;
         while(bcdos){
-            if(bcuno>=bcdos){
-                printf("\nLOS ID SON MENORES!!!HEMOS SIDO HACKEADOS\n");
+            if(bcuno->id >= bcdos->id){
+                printf("\nLos id no corresponden\n");
                 return;
             }
             bcuno = bcdos;
             bcdos = bcdos->sig;
         }
    }
-   printf("\n Todo bien\n");
+   printf("Todo bien :)\n");
 }

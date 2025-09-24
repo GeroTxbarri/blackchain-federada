@@ -20,13 +20,13 @@ int main() {
   Blockchain* bc1 = crearBlockchain();
   Blockchain* bc2 = crearBlockchain();
 
-  agregarBloque(bc0,p,&cont,"primer bloque");
+  agregarBloque(bc0,p,&cont,"BC0 primer bloque");
   agregarBloque(bc0,p,&cont,"segundo bloque");
 
-  agregarBloque(bc1,p,&cont,"primer bloque");
+  agregarBloque(bc1,p,&cont,"BC1 primer bloque");
   agregarBloque(bc1,p,&cont,"segundo bloque");
 
-  agregarBloque(bc2,p,&cont,"primer bloque");
+  agregarBloque(bc2,p,&cont,"BC2 primer bloque");
   agregarBloque(bc2,p,&cont,"segundo bloque");
 
   agregarBloque(bc0,p,&cont,"ultimo bloque");
@@ -48,10 +48,12 @@ int main() {
   imprimirValidacion(arbolValidacion,federacion->capacidad+1);
   alta(arbolValidacion,federacion,"cambie juasjuasjuas",p,&cont,2,federacion->capacidad+1,&raizAnterior);
   imprimirValidacion(arbolValidacion,federacion->capacidad+1);
-
+  printf("\n");
   imprimirBlockChain(bc1);
   actualizacion(1,7,"aeiou",p,&cont,federacion,arbolValidacion,federacion->capacidad+1,&raizAnterior);
   imprimirBlockChain(bc1);
+
+  federacion->blockchains[0]->primero->sig->sig->id=20;
   validacion(raizAnterior,arbolValidacion,federacion->capacidad+1,federacion);
   free(p);
   return 0;
