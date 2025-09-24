@@ -14,6 +14,7 @@ int main() {
   // IMPORTANTE: libero la memoria pedida para el arreglo de números primos
 
   int cont = 0;
+  int raizAnterior = 0;
 
   Blockchain* bc0 = crearBlockchain();
   Blockchain* bc1 = crearBlockchain();
@@ -43,17 +44,15 @@ int main() {
   imprimirBlockChain(bc2);
 
   int* arbolValidacion = construirArbolValidacion(federacion);
-  printf("\narbol de validacion : ");
-  for(int i = 0; i<6;i++){
-    printf(" %d,",arbolValidacion[i]);
-  } printf("\n");
+  
+  imprimirValidacion(arbolValidacion,federacion->capacidad+1);
+  alta(arbolValidacion,federacion,"cambie juasjuasjuas",p,&cont,2,federacion->capacidad+1,&raizAnterior);
+  imprimirValidacion(arbolValidacion,federacion->capacidad+1);
 
-  alta(arbolValidacion,federacion,"cambie JIJIJI",p,&cont,2);
-  printf("\narbol de validacion : ");
-  for(int i = 0; i<6;i++){
-    printf(" %d,",arbolValidacion[i]);
-  } printf("\n");
-
+  imprimirBlockChain(bc1);
+  actualizacion(1,7,"aeiou",p,&cont,federacion,arbolValidacion,federacion->capacidad+1,&raizAnterior);
+  imprimirBlockChain(bc1);
+  validacion(raizAnterior,arbolValidacion,federacion->capacidad+1,federacion);
   free(p);
   return 0;
 }
