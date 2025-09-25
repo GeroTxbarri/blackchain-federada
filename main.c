@@ -53,7 +53,9 @@ int main() {
   actualizacion(1,7,"aeiou",p,&cont,federacion,arbolValidacion,federacion->capacidad+1,&raizAnterior);
   imprimirBlockChain(bc1);
 
-  federacion->blockchains[0]->primero->sig->sig->id=20;
+  imprimirValidacion(arbolValidacion,federacion->capacidad+1);
+  validacion(raizAnterior,arbolValidacion,federacion->capacidad+1,federacion);
+  federacion->blockchains[0]->primero->sig->id=20;
   validacion(raizAnterior,arbolValidacion,federacion->capacidad+1,federacion);
   free(p);
   return 0;
