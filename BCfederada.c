@@ -167,13 +167,13 @@ void actualizacion(int indice, int id, char* mensaje, int arreglo[],int* cont, B
     actualizarArbolValidacion(arbol,arreglo[*cont],indice,tam,raizAnterior);
 }
 
-void validacion(int raizAnterior,int* arbol,int tam,BlockchainFederada* federada){
+int validacion(int raizAnterior,int* arbol,int tam,BlockchainFederada* federada){
     int mult = 1;
     for(int i=1; i<tam; i++)
          mult = mult * arbol[i];
     if(raizAnterior > arbol[0] || arbol[0] != mult){
         printf("\nLa raiz esta mal, es %d y deberia ser %d\n",raizAnterior,arbol[0]);
-        return;
+        return 0;
     }
     int cant = (federada->capacidad)-1;
     for(int i=0; i<cant;i++){
@@ -182,11 +182,12 @@ void validacion(int raizAnterior,int* arbol,int tam,BlockchainFederada* federada
         while(bcdos){
             if(bcuno->id >= bcdos->id){
                 printf("\nLos id no corresponden\n");
-                return;
+                return 0;
             }
             bcuno = bcdos;
             bcdos = bcdos->sig;
         }
    }
    printf("\nTodo bien :)");
+   return 1;
 }

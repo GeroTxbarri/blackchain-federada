@@ -54,9 +54,9 @@ int main() {
   imprimirBlockChain(bc1);
 
   imprimirValidacion(arbolValidacion,federacion->capacidad+1);
-  validacion(raizAnterior,arbolValidacion,federacion->capacidad+1,federacion);
-  federacion->blockchains[0]->primero->sig->id=20;
-  validacion(raizAnterior,arbolValidacion,federacion->capacidad+1,federacion);
+  int validar;
+  validar = validacion(raizAnterior,arbolValidacion,federacion->capacidad+1,federacion);
+  validar = validacion(raizAnterior,arbolValidacion,federacion->capacidad+1,federacion);
   free(p);
   return 0;
 }

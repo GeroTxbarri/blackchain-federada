@@ -47,4 +47,4 @@ void alta(int* arbol,BlockchainFederada* federada, char* mensaje,int arreglo[],i
 
 void actualizacion(int indice, int id, char* mensaje, int arreglo[],int* cont, BlockchainFederada* federada, int* arbol, int tam, int*raizAnterior);
 
-void validacion(int raizAnterior,int* arbol,int tam,BlockchainFederada* federada);
+int validacion(int raizAnterior,int* arbol,int tam,BlockchainFederada* federada);
