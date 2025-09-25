@@ -23,7 +23,6 @@ typedef struct _BlockchainFederada {
     
 } BlockchainFederada;
 
-int siguientePotencia(int n);
 
 Bloque* crearBloque(int id, char* mensaje);
 
@@ -34,6 +33,8 @@ BlockchainFederada* crearBCfederada(int tamano);
 void agregarBloque(Blockchain* cadena, int arreglo[],int*cont, char* mensaje);
 
 void agregarAfederacion(BlockchainFederada* federacion,Blockchain* bc);
+
+void redimencionarFederacion(BlockchainFederada* federacion);
 
 void imprimirBlockChain(Blockchain* bc);
 

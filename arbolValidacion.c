@@ -1,20 +1,21 @@
 #include "arbolValidacion.h"
 
-int* construirArbolValidacion(BlockchainFederada* federada) {
+int siguientePotenciaDos(int n) {
+    if (n <= 1) return 1;
+    int potenciaDOS = 1;
+    while (potenciaDOS < n) {
+        potenciaDOS *= 2;
+    }
+    return potenciaDOS;
+}
 
-    int cantidad = federada->capacidad;
-    int cantidadHojas = siguientePotencia(cantidad);
-    
-    int* arregloArbol = (int*)malloc((cantidadHojas + 1) * sizeof(int));
-   
-    int valorRaiz = 1;
-    for (int i = 0; i < cantidadHojas; i++) {
-        int valorHoja;
+int ultimoIdBlockchain(int i,int cantidad,Blockchain* bc){
+    int valorHoja;
         
         if (i < cantidad) {
 
-            if (federada->blockchains[i] != NULL && federada->blockchains[i]->ultimo!= NULL) {
-                valorHoja = federada->blockchains[i]->ultimo->id;
+            if (bc != NULL && bc->ultimo!= NULL) {
+                valorHoja = bc->ultimo->id;
             } else {
                 valorHoja = 1;
             }
@@ -22,7 +23,19 @@ int* construirArbolValidacion(BlockchainFederada* federada) {
     
             valorHoja = 1;
         }
-        
+}
+int* construirArbolValidacion(BlockchainFederada* federada) {
+
+    int cantidad = federada->capacidad;
+    int cantidadHojas = siguientePotenciaDos(cantidad);
+    
+    int* arregloArbol = (int*)malloc((cantidadHojas + 1) * sizeof(int));
+   
+    int valorRaiz = 1;
+    for (int i = 0; i < cantidadHojas; i++) {
+
+        int valorHoja = ultimoIdBlockchain(i,cantidad,federada->blockchains[i]);
+
         arregloArbol[i + 1] = valorHoja;
         valorRaiz *= valorHoja;      
     }

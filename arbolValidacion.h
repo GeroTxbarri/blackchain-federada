@@ -1,4 +1,7 @@
 #include "BCfederada.h"
+int siguientePotenciaDos(int n);
+
+int ultimoIdBlockchain(int i,int cantidad,Blockchain* bc);
 
 int* construirArbolValidacion(BlockchainFederada* federada);
 

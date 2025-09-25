@@ -9,3 +9,4 @@ void actualizacion(int indice, int id, char* mensaje, int arreglo[],int* cont, B
 int validacion(int* arbol,int tam,BlockchainFederada* federada);
 
 int validacion_subConjuntos(int* arbol, int n,int min,int max);
+

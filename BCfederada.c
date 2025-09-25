@@ -1,14 +1,6 @@
 
 #include "BCfederada.h"
 
-int siguientePotencia(int n) {
-    if (n <= 1) return 1;
-    int potenciaDOS = 1;
-    while (potenciaDOS < n) {
-        potenciaDOS *= 2;
-    }
-    return potenciaDOS;
-}
 
 Bloque* crearBloque(int id, char* mensaje){
     Bloque* b = malloc(sizeof(Bloque));
@@ -57,7 +49,24 @@ void agregarBloque(Blockchain* cadena, int arreglo[],int*cont, char* mensaje){
     }
 }
 
+void redimencionarFederacion(BlockchainFederada* federacion){
+
+    int nueva_capacidad = federacion->capacidad *2;
+    federacion->capacidad = nueva_capacidad;
+    Blockchain** nuevo = (Blockchain**)realloc(federacion->blockchains,federacion->capacidad* sizeof(Blockchain*));
+    if(nuevo==NULL){
+        printf("\nerror al redimensionar");
+    }
+    federacion->blockchains = nuevo;
+
+}
 void agregarAfederacion(BlockchainFederada* federacion,Blockchain*  bc){
+    if(federacion ==NULL || bc ==NULL){
+        printf("\n error federacion o blockchain vacia");
+    }
+    if(federacion->indice>federacion->capacidad){
+        redimencionarFederacion(federacion);
+    }
     federacion->blockchains[federacion->indice] = bc;
     federacion->indice++;
 }
