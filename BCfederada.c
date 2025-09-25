@@ -62,38 +62,6 @@ void agregarAfederacion(BlockchainFederada* federacion,Blockchain*  bc){
     federacion->indice++;
 }
 
-int* construirArbolValidacion(BlockchainFederada* federada) {
-
-    int cantidad = federada->capacidad;
-    int cantidadHojas = siguientePotencia(cantidad);
-    
-    int* arregloArbol = (int*)malloc((cantidadHojas + 1) * sizeof(int));
-   
-    int valorRaiz = 1;
-    for (int i = 0; i < cantidadHojas; i++) {
-        int valorHoja;
-        
-        if (i < cantidad) {
-
-            if (federada->blockchains[i] != NULL && federada->blockchains[i]->ultimo!= NULL) {
-                valorHoja = federada->blockchains[i]->ultimo->id;
-            } else {
-                valorHoja = 1;
-            }
-        } else {
-    
-            valorHoja = 1;
-        }
-        
-        arregloArbol[i + 1] = valorHoja;
-        valorRaiz *= valorHoja;      
-    }
-    
-    arregloArbol[0] = valorRaiz;
-
-    return arregloArbol;
-}
-
 
 void imprimirBlockChain(Blockchain* bc){
     
@@ -113,81 +81,5 @@ void imprimirBlockChain(Blockchain* bc){
     printf("\n");
 }
 
-void imprimirValidacion(int* arbol, int n){
-    printf("arbol de validacion : ");
-    for(int i = 0; i<n; i++)
-        printf(" %d,",arbol[i]);
-    printf("\n");
 
-}
 
-void actualizarArbolValidacion(int* arbol, int id, int aCambiar, int tam, int* raizAnterior){
-    *raizAnterior = arbol[0];
-    arbol[aCambiar] = id;
-    int raiz=1;
-    for(int i=1; i<tam; i++)
-        raiz = raiz * arbol[i];
-    arbol[0] = raiz;
-}
-
-void alta(int* arbol,BlockchainFederada* federada, char* mensaje,int arreglo[],int*cont,int numBC, int tam, int* raizAnterior){
-    agregarBloque(federada->blockchains[numBC],arreglo,cont,mensaje);
-    actualizarArbolValidacion(arbol,arreglo[*cont],numBC, tam, raizAnterior); 
-}
-
-void actualizacion(int indice, int id, char* mensaje, int arreglo[],int* cont, BlockchainFederada* federada, int* arbol, int tam, int* raizAnterior){
-    if (federada == NULL || federada->blockchains == NULL || indice < 0 || indice >= federada->capacidad) {
-        printf("no hay blockchains en federada.\n");
-        return;
-    }
-    Blockchain* cadena = federada->blockchains[indice];
-    if (cadena == NULL || cadena->primero == NULL) {
-        printf("La blockchain en el índice especificado es nula o vacía.\n");
-        return;
-    }
-    
-
-    Bloque* bloqueAModificar = cadena->primero;
-    while(bloqueAModificar != NULL){
-        if(bloqueAModificar->id == id)
-            break;
-        bloqueAModificar = bloqueAModificar->sig;
-    }
-    if(bloqueAModificar->id != id){
-        printf("\nNo se ha encontrado el id %d en la cadena %d\n",id,indice);
-        return;
-    }
-    strcpy(bloqueAModificar->mensaje, mensaje);
-
-    while(bloqueAModificar!=NULL){
-        bloqueAModificar->id = arreglo[*cont];
-        (*cont)++;
-        bloqueAModificar = bloqueAModificar->sig;
-    }
-    actualizarArbolValidacion(arbol,arreglo[*cont],indice,tam,raizAnterior);
-}
-
-int validacion(int raizAnterior,int* arbol,int tam,BlockchainFederada* federada){
-    int mult = 1;
-    for(int i=1; i<tam; i++)
-         mult = mult * arbol[i];
-    if(raizAnterior > arbol[0] || arbol[0] != mult){
-        printf("\nLa raiz esta mal, es %d y deberia ser %d\n",raizAnterior,arbol[0]);
-        return 0;
-    }
-    int cant = (federada->capacidad)-1;
-    for(int i=0; i<cant;i++){
-        Bloque* bcuno = federada->blockchains[i]->primero;
-        Bloque* bcdos = bcuno->sig;
-        while(bcdos){
-            if(bcuno->id >= bcdos->id){
-                printf("\nLos id no corresponden\n");
-                return 0;
-            }
-            bcuno = bcdos;
-            bcdos = bcdos->sig;
-        }
-   }
-   printf("\nTodo bien :)");
-   return 1;
-}

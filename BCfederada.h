@@ -35,16 +35,7 @@ void agregarBloque(Blockchain* cadena, int arreglo[],int*cont, char* mensaje);
 
 void agregarAfederacion(BlockchainFederada* federacion,Blockchain* bc);
 
-int* construirArbolValidacion(BlockchainFederada* federada);
-
 void imprimirBlockChain(Blockchain* bc);
 
-void imprimirValidacion(int* arbol, int n);
 
-void actualizarArbolValidacion(int* arbol, int num, int aCambiar, int tam, int* raizAnterior);
 
-void alta(int* arbol,BlockchainFederada* federada, char* mensaje,int arreglo[],int*cont,int numBC, int tam, int* raizAnterior);
-
-void actualizacion(int indice, int id, char* mensaje, int arreglo[],int* cont, BlockchainFederada* federada, int* arbol, int tam, int*raizAnterior);
-
-int validacion(int raizAnterior,int* arbol,int tam,BlockchainFederada* federada);

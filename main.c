@@ -1,7 +1,9 @@
 #include "stdlib.h"
 #include "stdio.h"
 #include "generador_primos.h"
-#include "BCfederada.h"
+
+
+#include "funciones.h"
 
 int main() {
   // Genero y muestro los primeros 100 números primos
@@ -14,7 +16,7 @@ int main() {
   // IMPORTANTE: libero la memoria pedida para el arreglo de números primos
 
   int cont = 0;
-  int raizAnterior = 0;
+ 
 
   Blockchain* bc0 = crearBlockchain();
   Blockchain* bc1 = crearBlockchain();
@@ -46,17 +48,30 @@ int main() {
   int* arbolValidacion = construirArbolValidacion(federacion);
   
   imprimirValidacion(arbolValidacion,federacion->capacidad+1);
-  alta(arbolValidacion,federacion,"cambie juasjuasjuas",p,&cont,2,federacion->capacidad+1,&raizAnterior);
+
+  alta(arbolValidacion,federacion,"cambie juasjuasjuas",p,&cont,1,federacion->capacidad+1);
   imprimirValidacion(arbolValidacion,federacion->capacidad+1);
   printf("\n");
   imprimirBlockChain(bc1);
-  actualizacion(1,7,"aeiou",p,&cont,federacion,arbolValidacion,federacion->capacidad+1,&raizAnterior);
-  imprimirBlockChain(bc1);
 
+  actualizacion(1,7,"aeiou",p,&cont,federacion,arbolValidacion,federacion->capacidad+1);
+  imprimirBlockChain(bc1);
   imprimirValidacion(arbolValidacion,federacion->capacidad+1);
-  int validar;
-  validar = validacion(raizAnterior,arbolValidacion,federacion->capacidad+1,federacion);
-  validar = validacion(raizAnterior,arbolValidacion,federacion->capacidad+1,federacion);
+
+  //federacion->blockchains[0]->primero->sig->id=20;
+
+  if(validacion(arbolValidacion,federacion->capacidad+1,federacion)){
+    printf("\n la federacion es valida");
+  }
+  else
+    printf("\n la federacion no es valida");
+
+  
+  if(validacion_subConjuntos(arbolValidacion,8,0,1)){
+    printf("\n el subconjunto es valida");
+  }
+  else
+    printf("\n el subconjunto no es valida");
   free(p);
   return 0;
 }
