@@ -3,6 +3,7 @@
 #include "generador_primos.h"
 
 
+
 #include "funciones.h"
 
 int main() {
@@ -72,6 +73,9 @@ int main() {
   }
   else
     printf("\n el subconjunto no es valida");
+
+  liberarFederada(federacion);
+  free(arbolValidacion);
   free(p);
   return 0;
 }

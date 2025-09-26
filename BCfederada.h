@@ -38,5 +38,11 @@ void redimencionarFederacion(BlockchainFederada* federacion);
 
 void imprimirBlockChain(Blockchain* bc);
 
+void liberarBloque(Bloque* bloque);
+
+void liberarBlockchain(Blockchain* blockchain);
+
+void liberarFederada(BlockchainFederada* BlockchainFederada);
+
 
 

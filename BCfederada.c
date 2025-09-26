@@ -90,5 +90,28 @@ void imprimirBlockChain(Blockchain* bc){
     printf("\n");
 }
 
+void liberarBloque(Bloque* bloque){
+    free(bloque);
+}
+
+void liberarBlockchain(Blockchain* blockchain){
+    Bloque* actual = blockchain->primero;
+    while (actual != NULL) {
+        Bloque* siguiente = actual->sig;
+        liberarBloque(actual);
+        actual = siguiente;
+    }
+    free(blockchain);
+
+}
+
+void liberarFederada(BlockchainFederada* BlockchainFederada){
+
+    for(int i =0;i<BlockchainFederada->indice;i++){
+        liberarBlockchain(BlockchainFederada->blockchains[i]);
+    }
+    free(BlockchainFederada->blockchains);
+    free(BlockchainFederada);
+}
 
 
