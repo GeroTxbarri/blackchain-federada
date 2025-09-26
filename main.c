@@ -49,14 +49,19 @@ int main() {
   int* arbolValidacion = construirArbolValidacion(federacion);
   
   imprimirValidacion(arbolValidacion,federacion->capacidad+1);
+  printf("\n");
 
-  alta(arbolValidacion,federacion,"cambie juasjuasjuas",p,&cont,1,federacion->capacidad+1);
+  alta(arbolValidacion,federacion,"añadido",p,&cont,1,federacion->capacidad+1);
+  imprimirBlockChain(bc0);
+  imprimirBlockChain(bc1);
+  imprimirBlockChain(bc2);
   imprimirValidacion(arbolValidacion,federacion->capacidad+1);
   printf("\n");
-  imprimirBlockChain(bc1);
 
   actualizacion(1,7,"aeiou",p,&cont,federacion,arbolValidacion,federacion->capacidad+1);
+  imprimirBlockChain(bc0);
   imprimirBlockChain(bc1);
+  imprimirBlockChain(bc2);
   imprimirValidacion(arbolValidacion,federacion->capacidad+1);
 
   //federacion->blockchains[0]->primero->sig->id=20;
@@ -68,12 +73,29 @@ int main() {
     printf("\n la federacion no es valida");
 
   
-  if(validacion_subConjuntos(arbolValidacion,8,0,1)){
+  if(validacion_subConjuntos(arbolValidacion,697,0,1)){
     printf("\n el subconjunto es valida");
   }
   else
     printf("\n el subconjunto no es valida");
 
+  printf("\n");
+  printf("prueba para una federacion y un subconjuntos no validos:\n");
+  federacion->blockchains[0]->primero->sig->id=20;
+  
+  if(validacion(arbolValidacion,federacion->capacidad+1,federacion)){
+    printf("\n la federacion es valida");
+  }
+  else
+    printf("\n la federacion no es valida");
+  
+  printf("\n");
+  if(validacion_subConjuntos(arbolValidacion,100,0,1)){
+    printf("\n el subconjunto es valida");
+  }
+  else
+    printf("\n el subconjunto no es valida");
+    
   liberarFederada(federacion);
   free(arbolValidacion);
   free(p);

@@ -1,8 +1,9 @@
 #include "funciones.h"
 
 void alta(int* arbol,BlockchainFederada* federada, char* mensaje,int arreglo[],int*cont,int numBC, int tam){
+    int id_actual = arreglo[*cont];
     agregarBloque(federada->blockchains[numBC],arreglo,cont,mensaje);
-    actualizarArbolValidacion(arbol,arreglo[*cont],numBC, tam); 
+    actualizarArbolValidacion(arbol,id_actual,numBC+1, tam); 
 }
 
 void actualizacion(int indice, int id, char* mensaje, int arreglo[],int* cont, BlockchainFederada* federada, int* arbol, int tam){
@@ -16,7 +17,6 @@ void actualizacion(int indice, int id, char* mensaje, int arreglo[],int* cont, B
         return;
     }
     
-
     Bloque* bloqueAModificar = cadena->primero;
     while(bloqueAModificar != NULL){
         if(bloqueAModificar->id == id)
@@ -28,13 +28,14 @@ void actualizacion(int indice, int id, char* mensaje, int arreglo[],int* cont, B
         return;
     }
     strcpy(bloqueAModificar->mensaje, mensaje);
-
+    int ultimo_primo=0;
     while(bloqueAModificar!=NULL){
         bloqueAModificar->id = arreglo[*cont];
+        ultimo_primo =arreglo[*cont];
         (*cont)++;
         bloqueAModificar = bloqueAModificar->sig;
     }
-    actualizarArbolValidacion(arbol,arreglo[*cont],indice,tam);
+    actualizarArbolValidacion(arbol,ultimo_primo,indice+1,tam);
 }
 
 int validacion(int* arbol,int tam,BlockchainFederada* federada){

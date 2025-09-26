@@ -9,21 +9,7 @@ int siguientePotenciaDos(int n) {
     return potenciaDOS;
 }
 
-int ultimoIdBlockchain(int i,int cantidad,Blockchain* bc){
-    int valorHoja;
-        
-        if (i < cantidad) {
 
-            if (bc != NULL && bc->ultimo!= NULL) {
-                valorHoja = bc->ultimo->id;
-            } else {
-                valorHoja = 1;
-            }
-        } else {
-    
-            valorHoja = 1;
-        }
-}
 int* construirArbolValidacion(BlockchainFederada* federada) {
 
     int cantidad = federada->capacidad;
@@ -32,9 +18,20 @@ int* construirArbolValidacion(BlockchainFederada* federada) {
     int* arregloArbol = (int*)malloc((cantidadHojas + 1) * sizeof(int));
    
     int valorRaiz = 1;
-    for (int i = 0; i < cantidadHojas; i++) {
+    for (int i = 0; i < cantidadHojas +1; i++) {
 
-        int valorHoja = ultimoIdBlockchain(i,cantidad,federada->blockchains[i]);
+        int valorHoja;
+
+        if(i<cantidad){
+            if(federada->blockchains[i] != NULL && federada->blockchains[i]->ultimo!=NULL){
+                valorHoja = federada->blockchains[i]->ultimo->id;
+            }else{
+                valorHoja=1;
+            }
+        } else {
+            valorHoja=1;
+            
+        }
 
         arregloArbol[i + 1] = valorHoja;
         valorRaiz *= valorHoja;      
